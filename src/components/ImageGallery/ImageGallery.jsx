@@ -6,6 +6,7 @@ import { GalleryList } from './ImageGallery.styled';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { LoadMoreButton } from 'components/LoadMoreButton/LoadMoreButton';
 import { LoadingSpinner } from 'components/LoadingSpinner/LoadingSpinner';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 let page = 1;
 
@@ -58,7 +59,7 @@ export class ImageGallery extends Component {
 
     return (
       <>
-        {isError && <h1>OOPS. something went wrong try reloading the page</h1>}
+        {isError && <ErrorMessage />}
         {isLoading && <LoadingSpinner />}
         <GalleryList id="gallery">
           {images.map((image, index) => (
