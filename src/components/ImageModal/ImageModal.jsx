@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ModalBackdrop, Modal } from './ImageModal.styled';
 
 export class ImageModal extends Component {
@@ -27,3 +28,9 @@ export class ImageModal extends Component {
     );
   }
 }
+
+ImageModal.propTypes = {
+  tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  handleBackdropClick: PropTypes.func.isRequired,
+};

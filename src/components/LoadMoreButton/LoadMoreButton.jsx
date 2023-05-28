@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { LoadMoreBtn } from './LoadMoreButton.styled';
 import { SmoothScroll } from 'services/smoothscroll';
 
@@ -15,3 +16,7 @@ export class LoadMoreButton extends Component {
     );
   }
 }
+
+LoadMoreButton.propTypes = {
+  handleLoadMoreButton: PropTypes.func.isRequired,
+};

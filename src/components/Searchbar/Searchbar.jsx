@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import PropTypes from 'prop-types';
 
 import { FcSearch } from 'react-icons/fc';
 import {
@@ -50,3 +51,7 @@ export class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func,
+};

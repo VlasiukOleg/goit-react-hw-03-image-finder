@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getSearchImage } from 'services/pixabayApi';
 import { GalleryList } from './ImageGallery.styled';
@@ -28,7 +29,7 @@ export class ImageGallery extends Component {
     }
   };
 
-  async componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, _) {
     try {
       if (prevProps.query !== this.props.query) {
         this.setState({ isLoading: true, images: [] });
@@ -63,7 +64,6 @@ export class ImageGallery extends Component {
           {images.map((image, index) => (
             <ImageGalleryItem
               key={index}
-              pageUrl={image.pageURL}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
               tags={image.tags}
@@ -77,3 +77,7 @@ export class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  query: PropTypes.string,
+};
