@@ -9,12 +9,14 @@ import { LoadingSpinner } from 'components/LoadingSpinner/LoadingSpinner';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 let page = 1;
+const perPage = 12;
 
 export class ImageGallery extends Component {
   state = {
     images: [],
     isLoading: false,
     isError: false,
+    isLoadMore: false,
   };
 
   handleLoadMoreButton = async () => {
@@ -25,6 +27,12 @@ export class ImageGallery extends Component {
       this.setState(prevState => ({
         images: [...prevState.images, ...data.hits],
       }));
+
+      let totalPage = data.totalHits / perPage;
+      if (page > totalPage) {
+        this.setState({ isLoadMore: false });
+        return;
+      }
     } catch (error) {
       this.setState({ isError: true });
     }
@@ -33,7 +41,8 @@ export class ImageGallery extends Component {
   async componentDidUpdate(prevProps, _) {
     try {
       if (prevProps.query !== this.props.query) {
-        this.setState({ isLoading: true, images: [] });
+        page = 1;
+        this.setState({ isLoading: true, images: [], isLoadMore: false });
         const data = await getSearchImage(this.props.query, page);
 
         if (data.hits.length === 0) {
@@ -44,10 +53,16 @@ export class ImageGallery extends Component {
           return;
         }
 
+        let totalPage = data.totalHits / perPage;
+
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
           isLoading: false,
         }));
+
+        if (totalPage > 1) {
+          this.setState({ isLoadMore: true });
+        }
       }
     } catch (error) {
       this.setState({ isError: true, isLoading: false });
@@ -55,7 +70,7 @@ export class ImageGallery extends Component {
   }
 
   render() {
-    const { images, isLoading, isError } = this.state;
+    const { images, isLoading, isError, isLoadMore } = this.state;
 
     return (
       <>
@@ -71,8 +86,11 @@ export class ImageGallery extends Component {
             />
           ))}
         </GalleryList>
-        {images.length > 0 && (
-          <LoadMoreButton handleLoadMoreButton={this.handleLoadMoreButton} />
+        {isLoadMore && (
+          <LoadMoreButton
+            handleLoadMoreButton={this.handleLoadMoreButton}
+            isLoadMore={isLoadMore}
+          />
         )}
       </>
     );
@@ -80,5 +98,5 @@ export class ImageGallery extends Component {
 }
 
 ImageGallery.propTypes = {
-  query: PropTypes.string,
+  query: PropTypes.string.isRequired,
 };

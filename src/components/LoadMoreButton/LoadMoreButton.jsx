@@ -1,16 +1,16 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { LoadMoreBtn } from './LoadMoreButton.styled';
-import { SmoothScroll } from 'services/smoothscroll';
+import { smoothScroll } from 'services/smoothscroll';
 
 export class LoadMoreButton extends Component {
   componentDidUpdate() {
-    SmoothScroll();
+    smoothScroll();
   }
 
   render() {
     return (
-      <LoadMoreBtn onClick={this.props.handleLoadMoreButton}>
+      <LoadMoreBtn onClick={this.props.handleLoadMoreButton} id="load-more">
         LoadMore
       </LoadMoreBtn>
     );

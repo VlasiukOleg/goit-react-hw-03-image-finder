@@ -1,4 +1,4 @@
-export const SmoothScroll = () => {
+export const smoothScroll = () => {
   const { height: cardHeight } = document
     .querySelector('#gallery')
     .firstElementChild.getBoundingClientRect();
