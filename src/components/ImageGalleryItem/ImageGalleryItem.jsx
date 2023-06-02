@@ -28,7 +28,7 @@ export class ImageGalleryItem extends Component {
     const { webformatURL, tags, largeImageURL } = this.props;
     return (
       <>
-        <GalleryItem onClick={this.handleClickImage}>
+        <GalleryItem onClick={this.toogleModal}>
           <img src={webformatURL} alt={tags} />
         </GalleryItem>
         {isShowModal && (
