@@ -21,10 +21,6 @@ export const ImageGallery = ({ images }) => {
   );
 };
 
-// ImageGallery.propTypes = {
-//   query: PropTypes.string.isRequired,
-// };
-
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
 };

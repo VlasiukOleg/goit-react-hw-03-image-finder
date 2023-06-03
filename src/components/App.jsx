@@ -38,6 +38,10 @@ export class App extends Component {
 
   handleLoadMoreButton = () => {
     this.setState(prevState => ({ page: prevState.page + 1 }));
+
+    setTimeout(() => {
+      smoothScroll();
+    }, 500);
   };
 
   async componentDidUpdate(_, prevState) {
@@ -73,10 +77,6 @@ export class App extends Component {
       }
     } catch (error) {
       this.setState({ isError: true, isLoading: false });
-    }
-
-    if (prevState.isLoadMore === this.state.isLoadMore) {
-      smoothScroll();
     }
   }
 
